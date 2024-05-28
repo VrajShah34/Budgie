@@ -30,10 +30,10 @@ function SideNav() {
     <div className="h-screen p-5 border shadow-md">
       <Image src="./logo.svg" alt="logo" width={160} height={100} className="pb-10" />
 
-      <div>
+      <div className='pt-5'>
         {menuList.map((menu) => (
-          <h2 key={menu.id} className="gap-2 flex items-center p-5 text-gray-600 font-semibold cursor-pointer rounded-md">
-            <menu.icon className="mr-2" /> {/* Render the icon */}
+          <h2 key={menu.id} className="gap-2 flex items-center p-5 text-gray-700 font-bold text-xl cursor-pointer rounded-md">
+            <menu.icon className="mr-2" /> 
             {menu.name}
           </h2>
         ))}
