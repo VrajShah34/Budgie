@@ -8,6 +8,8 @@ import {
   SignedOut,
   UserButton
 } from '@clerk/nextjs'
+import { Toaster } from "../@/components/ui/sonner.jsx";
+
 
 const outfit = Outfit({ subsets: ["latin"] });
 
@@ -27,6 +29,7 @@ export default function RootLayout({ children }) {
           <UserButton />
         </SignedIn> */}
       <body className={outfit.className}>{children}</body>
+      <Toaster/>
     </html>
     </ClerkProvider>
   );

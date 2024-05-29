@@ -13,19 +13,45 @@ import {
   } from "../../../../../@/components/ui/dialog.jsx"
 import EmojiPicker from 'emoji-picker-react'
 import { Input } from '../../../../../@/components/ui/input.jsx'
+import { db } from '../../../../../utils/dbConfig.jsx'
+import { Budgets } from '../../../../../utils/schema.jsx'
+import { useUser } from '@clerk/nextjs'
+import { toast } from 'sonner'
   
 
 function CreateBudget() {
 
+    //Use state to manage the emoji icon picking for bugdet
     const [emojiIcon , setImojiIcon] = useState('🤑');
     const [openEmojiPicker , setOpenEmojiPicker] = useState(false);
 
+    //Use state to manage the budget name and amount
     const [name, setName] = useState('');
     const [amount, setAmount] = useState(''); 
 
+    //Get the current user
+    const {user} = useUser();
+    
+    //Function to create a new budget and save it in database
+    const onCreateBudget = async () => {
+        const result = await db.insert(Budgets)
+        .values({
+            name:name,
+            amount:amount,
+            icon:emojiIcon,
+            createdBy: user?.primaryEmailAddress?.emailAddress
+            
+        }).returning({insertedId:Budgets.id});
+
+        if(result){
+            toast('New Budget Created Successfully'); // uses the sonner library to show a toast message
+        }
+    }
+
   return (
     <div>
-        
+
+         {/* Dialog component to create a new budget using the schadcn dialog library*/}
         <Dialog > 
             <DialogTrigger asChild>
             <div className='bg-slate-100 p-10  rounded-md items-center flex flex-col border-2 border-dashed
@@ -38,7 +64,7 @@ function CreateBudget() {
            
             <DialogContent className='w-1/2 '>
 
-                <DialogHeader>
+                 <DialogHeader>         {/*  All the content in the create budget window popup */}
 
                   <DialogTitle className='mt-4'>Create New Budget</DialogTitle>
                   <DialogDescription>
@@ -75,7 +101,9 @@ function CreateBudget() {
 
                    <Button 
                    className='mt-3 mb-7 '
-                   disabled = {name.length == 0 || amount.length == 0}
+                //    {/* Disable the button if the name or amount is empty */}
+                   disabled = {name.length == 0 || amount.length == 0} 
+                   onClick={() => onCreateBudget()}
                    > Create Budget</Button>
 
                 </div>
