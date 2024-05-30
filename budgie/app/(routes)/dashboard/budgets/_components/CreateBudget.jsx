@@ -19,7 +19,7 @@ import { useUser } from '@clerk/nextjs'
 import { toast } from 'sonner'
   
 
-function CreateBudget() {
+function CreateBudget({refereshData}) {
 
     //Use state to manage the emoji icon picking for bugdet
     const [emojiIcon , setImojiIcon] = useState('🤑');
@@ -44,6 +44,9 @@ function CreateBudget() {
         }).returning({insertedId:Budgets.id});
 
         if(result){
+
+            refereshData(); // Refresh the data after creating a new budget
+
             toast('New Budget Created Successfully'); // uses the sonner library to show a toast message
         }
     }
