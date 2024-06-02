@@ -9,6 +9,22 @@ import { useUser } from '@clerk/nextjs'
 import BudgetItem from '../../budgets/_components/BudgetItem'
 import AddExpenses from '../../expenses/_components/AddExpenses'
 import ExpenseListTable from '../../expenses/_components/ExpenseListTable'
+import { Button } from '../../../../../components/ui/button'
+import { Trash } from 'lucide-react'
+
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+  } from "../../../../../@/components/ui/alert-dialog"
+
+  
 
 function ExpensesScreen({params}) {
 
@@ -51,9 +67,46 @@ function ExpensesScreen({params}) {
         console.log(result);
     }
 
+
+    const deleteBudget = async () => {
+        const result = await db.delete(Budgets)
+        .where(eq(Budgets.id, params.id))
+        .returning();
+
+        console.log(result);
+    }
+
   return (
     <div className='p-10' >
-        <h2 className='text-2xl font-bold' >My Expenses</h2>
+        <h2 className='text-2xl font-bold flex justify-between ' >My Expenses 
+        
+           
+                
+
+            <AlertDialog>
+                <AlertDialogTrigger asChild >
+                <Button className='flex gap-2 mb-5' variant="destructive" >
+                    <Trash/> Delete Budget
+                 </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        This action cannot be undone. This will permanently delete your account
+                        and remove your data from our servers.
+                    </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction  onClick = {() => deleteBudget()}   >Continue</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+
+            
+        
+        </h2>
 
         <div className='grid grid-cols-1 md:grid-cols-2' >
             
