@@ -10,7 +10,8 @@ import BudgetItem from '../../budgets/_components/BudgetItem'
 import AddExpenses from '../../expenses/_components/AddExpenses'
 import ExpenseListTable from '../../expenses/_components/ExpenseListTable'
 import { Button } from '../../../../../components/ui/button'
-import { Trash } from 'lucide-react'
+import { Edit, PenBox, Trash } from 'lucide-react'
+import EditBudget from '../../expenses/_components/EditBudget'
 
 import {
     AlertDialog,
@@ -69,9 +70,17 @@ function ExpensesScreen({params}) {
 
 
     const deleteBudget = async () => {
+
+        const deleteExpenses = await db.delete(Expenses)
+        .where(eq(Expenses.budgetId, params.id))
+        .returning();
+
+        if(deleteExpenses){
+
         const result = await db.delete(Budgets)
         .where(eq(Budgets.id, params.id))
         .returning();
+        }
 
         console.log(result);
     }
@@ -81,7 +90,11 @@ function ExpensesScreen({params}) {
         <h2 className='text-2xl font-bold flex justify-between ' >My Expenses 
         
            
-                
+        <div  className='flex gap-2 items-center'>
+
+            <EditBudget/>
+
+            
 
             <AlertDialog>
                 <AlertDialogTrigger asChild >
@@ -93,8 +106,7 @@ function ExpensesScreen({params}) {
                     <AlertDialogHeader>
                     <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        This action cannot be undone. This will permanently delete your account
-                        and remove your data from our servers.
+                        This action cannot be undone. This will permanently delete your budget
                     </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
@@ -103,7 +115,7 @@ function ExpensesScreen({params}) {
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
-
+        </div>
             
         
         </h2>
