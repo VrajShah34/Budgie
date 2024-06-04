@@ -58,10 +58,33 @@ npm run dev
 npm db:push
 ```
 
+
+
 ##Deployed Site-
 [Budgie](https://budgie-delta.vercel.app/)
+
 
 
 ## How do I deploy this?
 
 Follow the deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+
+
+## Screenshots -
+![HomePage](https://github.com/VrajShah34/Budgie/blob/main/budgie/public/screenshots/HomePage.png?raw=true)
+
+![DashBoard](https://github.com/VrajShah34/Budgie/blob/main/budgie/public/screenshots/Dashboard.png?raw=true)
+
+![CreateBudget](https://github.com/VrajShah34/Budgie/blob/main/budgie/public/screenshots/CreateBudget.png?raw=true)
+
+![Expenses](https://github.com/VrajShah34/Budgie/blob/main/budgie/public/screenshots/Expenses.png?raw=true)
+
+![Expenses](https://github.com/VrajShah34/Budgie/blob/main/budgie/public/screenshots/Expenses.png?raw=true)
+
+![LatestExpenses](https://github.com/VrajShah34/Budgie/blob/main/budgie/public/screenshots/LatestExpenses.png?raw=true)
+
+![MyBudgets](https://github.com/VrajShah34/Budgie/blob/main/budgie/public/screenshots/MyBudgets.png?raw=true)
+
+![Myexpenses](https://github.com/VrajShah34/Budgie/blob/main/budgie/public/screenshots/Myexpenses.png?raw=true)
+
