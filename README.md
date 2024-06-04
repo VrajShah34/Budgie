@@ -28,26 +28,31 @@ Elevate your financial management with Budgie - An expense tracker spp. Our user
 ```bash
 https://https://github.com/VrajShah34/Budgie.git
 ```
+2. Change directory to main directory
 
-2. Install dependencies using pnpm
+```bash
+cd .\budgie\
+```
+
+3. Install dependencies using pnpm
 
 ```bash
 npm install
 ```
 
-3. Copy the `.env.example` to `.env` and update the variables.
+4. Copy the `.env.example` to `.env` and update the variables.
 
 ```bash
 cp .env.example .env
 ```
 
-4. Start the development server
+5. Start the development server
 
 ```bash
 npm run dev
 ```
 
-5. Push the database schema
+6. Push the database schema
 
 ```bash
 npm db:push
